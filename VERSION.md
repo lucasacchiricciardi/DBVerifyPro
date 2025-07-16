@@ -113,4 +113,3 @@ Production-ready security features including:
 Version 1.0 represents a complete, production-ready database migration verification tool. The application is fully functional and ready for deployment to help users validate their database migrations with confidence.
 
 For deployment instructions, see `README.md`.  
-For technical architecture details, see `replit.md`.
