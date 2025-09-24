@@ -1,13 +1,8 @@
 import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
+import { log, serveStatic } from "./static";
 import { progressService } from "./services/progress-service";
-
-// Import functions based on environment
-const isDevelopment = process.env.NODE_ENV === "development";
-const { log, serveStatic, setupVite } = isDevelopment 
-  ? await import("./vite")
-  : await import("./static");
 
 // Global error handlers for unhandled promises and exceptions
 process.on('unhandledRejection', (reason, promise) => {
@@ -64,14 +59,8 @@ app.use((req, res, next) => {
   const { standardErrorHandler } = await import("./utils/api-response");
   app.use(standardErrorHandler);
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development" && setupVite) {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
+  // In production, only serve static files
+  serveStatic(app);
 
   // Use PORT from environment variable or default to 5000
   // this serves both the API and the client.

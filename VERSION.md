@@ -1,8 +1,18 @@
-# DB-Verify Version 1.0
+# DB-Verify Version 1.1.0
 
-**Release Date:** July 15, 2025  
+**Release Date:** September 24, 2025  
 **Author:** Luca Sacchi Ricciardi  
 **License:** Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)
+
+## Version 1.1.0 - Docker Release
+
+**NEW in 1.1.0:**
+- ✅ **Docker Support**: Complete containerization with multi-stage build
+- ✅ **Docker Hub Publishing**: Public container image available at `lucasacchircciardi/dbverify`
+- ✅ **Production-Ready Deployment**: Optimized container for production environments
+- ✅ **Health Check Integration**: Built-in health monitoring endpoint
+- ✅ **Security Hardening**: Non-root user execution in container
+- ✅ **Docker Compose**: Complete orchestration setup for easy deployment
 
 ## Version 1.0 Features
 

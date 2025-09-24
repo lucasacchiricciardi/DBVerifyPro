@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  dbverify:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+    # Uncomment the next line if you have a .env file with environment variables
+    # env_file: .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# Example setup with a PostgreSQL database for app data storage (optional)
+# Uncomment the section below if your app needs a database for storing application data
+#
+#  postgres:
+#    image: postgres:16-alpine
+#    environment:
+#      POSTGRES_DB: dbverify
+#      POSTGRES_USER: dbverify
+#      POSTGRES_PASSWORD: your_secure_password
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#    restart: unless-stopped
+#
+#volumes:
+#  postgres_data:

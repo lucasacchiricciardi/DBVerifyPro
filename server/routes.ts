@@ -58,6 +58,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use(addRequestId);
   app.use(validationErrorHandler);
 
+  // Health check endpoint for container monitoring
+  app.get("/api/health", (req, res) => {
+    res.status(200).json({ 
+      status: "healthy", 
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      version: process.env.npm_package_version || "1.0.0"
+    });
+  });
+
   // Ensure temp directory exists
   const tempDir = path.join(process.cwd(), 'temp');
   if (!fs.existsSync(tempDir)) {
